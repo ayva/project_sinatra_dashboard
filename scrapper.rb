@@ -86,7 +86,7 @@ def data_calc(str)
 end
 
 
-Scrapper.new.scrap
+puts Scrapper.new.scrap[0]
 
 
   # def search_by_date(start_url)

@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'scrapper'
+require_relative 'scrapper.rb'
 
 
 
