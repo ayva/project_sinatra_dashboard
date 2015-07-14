@@ -17,6 +17,7 @@ class Scrapper
     @page = @agent.get('http://www.dice.com/')
     keyword_form = page.form_with(:id => "search-form")
     keyword_form.q = 'ruby developer'
+    keyword_form.l = 'San Francisco, CA'
 
     # Actually submit the form
     @page = @agent.submit(keyword_form)
@@ -32,21 +33,6 @@ class Scrapper
   end
 
 #start_url ="https://www.dice.com/jobs/q-ruby+developer-sort-date-l-San+Francisco%2C+CA-radius-30-startPage-1-limit-30-jobs.html"
-
-  def search_by_date(start_url)
-
-    #page.link_with(:text => /date/).click ??? does return us a sorted page
-    # nok=sorted_page.search(".//div[@class='jobs-page-header']")
-
-    loop do 
-
-        j=load_page(url)
-        write_csv(build_info(j))
-        #regex URL increment page index << Page-2
-      break if load_page(url).empty?
-    end
-    
-  end
 
   def build_info(arr)
      all_positions = []
@@ -102,3 +88,18 @@ end
 
 Scrapper.new.scrap
 
+
+  # def search_by_date(start_url)
+
+  #   #page.link_with(:text => /date/).click ??? does return us a sorted page
+  #   # nok=sorted_page.search(".//div[@class='jobs-page-header']")
+
+  #   loop do 
+
+  #       j=load_page(url)
+  #       write_csv(build_info(j))
+  #       #regex URL increment page index << Page-2
+  #     break if load_page(url).empty?
+  #   end
+    
+  # end
