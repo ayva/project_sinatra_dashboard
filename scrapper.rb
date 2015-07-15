@@ -12,17 +12,18 @@ class Scrapper
     @agent = Mechanize.new
   end
 
-  def scrap 
+  def scrap(job,city)
     
     @page = @agent.get('http://www.dice.com/')
     keyword_form = page.form_with(:id => "search-form")
-    keyword_form.q = 'ruby developer'
-    keyword_form.l = 'San Francisco, CA'
+    keyword_form.q = job # 'ruby developer'
+    keyword_form.l = city # 'San Francisco, CA'
 
     # Actually submit the form
     @page = @agent.submit(keyword_form)
 
     results = page.search(".//div[@class='serp-result-content']")
+    results=results[0..2]
     build_info(results)  
   end
 
@@ -37,7 +38,7 @@ class Scrapper
   def build_info(arr)
      all_positions = []
       arr.each do |position|
-
+        sleep (0.5)
         position_name=position.at_css('h3 a').text.strip
         company=position.at_css('li a').text.strip
         link=position.at_css('h3 a').attribute('href').value
@@ -86,7 +87,7 @@ def data_calc(str)
 end
 
 
-puts Scrapper.new.scrap[0]
+#puts Scrapper.new.scrap(job,city)[0]
 
 
   # def search_by_date(start_url)
