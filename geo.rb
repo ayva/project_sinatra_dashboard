@@ -13,9 +13,8 @@ class Locator
 
   def getgeoip
     url="http://www.telize.com/geoip/" + "#{@ip}"
-    page = Nokogiri::HTML(open(url))   
-    str=page.css('p').text
-    hash=JSON.parse(str)
+    hash = JSON.parse (Nokogiri::HTML(open(url)).css('p').text )
+
     hash
   end
   
@@ -24,4 +23,4 @@ end
 
 #Locator.new("73.158.206.211").getgeoip
 
-Locator.new("127.0.0.1").getgeoip
+#Locator.new("127.0.0.1").getgeoip

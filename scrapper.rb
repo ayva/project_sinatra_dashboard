@@ -12,7 +12,7 @@ class Scrapper
     @agent = Mechanize.new
   end
 
-  def scrap(job,city)
+  def scrap(job,city="")
     
     @page = @agent.get('http://www.dice.com/')
     keyword_form = page.form_with(:id => "search-form")
